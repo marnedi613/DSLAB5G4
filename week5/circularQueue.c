@@ -5,7 +5,7 @@ int queue[MAX];
 int front = -1, rear = -1;
 int isFull()
 {
-	if((front == 0 && rear == MAX-1) || (rear+1 == front))
+	if ((front == (rear + 1) % MAX))
 	return 1;
 	return 0;
 }
@@ -29,7 +29,7 @@ void insert()
 	}
 	if(isEmpty())
 	{
-		front = rear = 1;
+		front = rear = 0;   // ? fixed (was 1)
 	}
 	else if(rear == MAX - 1 && front != 0)
 	{
@@ -100,7 +100,7 @@ void display()
     {
     	for(i = front;i<MAX;i++)
     	printf("\t%d",queue[i]);
-    	for(i=0;i<rear;i++)
+    	for(i=0;i<=rear;i++)   // ? fixed (was <rear)
     	printf("\t%d",queue[i]);
 	}
 }
@@ -143,7 +143,3 @@ int main()
 	
 	return 0;
 }
-		
-	
-	
-
